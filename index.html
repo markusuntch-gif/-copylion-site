@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CopyLion - Collect AI text fragments</title>
+  <meta name="description" content="CopyLion is a focused writing utility for collecting useful AI answers, prompts and text fragments from ChatGPT, Claude, Gemini and other apps.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071014;
+      --panel: #0d1a20;
+      --panel-soft: #10242b;
+      --text: #edf7fa;
+      --muted: #9fb4bb;
+      --accent: #22d3ee;
+      --accent-strong: #67e8f9;
+      --border: rgba(148, 199, 210, 0.18);
+      --shadow: rgba(0, 0, 0, 0.35);
+      --max: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(34, 211, 238, 0.12), transparent 32rem),
+        linear-gradient(180deg, #071014 0%, #081115 48%, #05090b 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(7, 16, 20, 0.84);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .nav {
+      width: min(100% - 40px, var(--max));
+      margin: 0 auto;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 750;
+      letter-spacing: 0;
+      color: var(--text);
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: #041014;
+      background: linear-gradient(135deg, var(--accent), #a7f3d0);
+      font-weight: 850;
+      box-shadow: 0 12px 30px rgba(34, 211, 238, 0.18);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    section {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-inner {
+      width: min(100% - 40px, var(--max));
+      margin: 0 auto;
+      padding: 84px 0;
+    }
+
+    .hero .section-inner {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      align-items: center;
+      padding: 96px 0 64px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent-strong);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 24px;
+      font-size: clamp(3rem, 8vw, 6.8rem);
+      line-height: 0.93;
+      letter-spacing: 0;
+      max-width: 780px;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      max-width: 680px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .button.primary {
+      color: #041014;
+      border-color: transparent;
+      background: var(--accent);
+      box-shadow: 0 18px 44px rgba(34, 211, 238, 0.18);
+    }
+
+    .app-preview {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(16, 36, 43, 0.92), rgba(8, 17, 21, 0.92));
+      box-shadow: 0 26px 70px var(--shadow);
+      padding: 18px;
+      max-width: 390px;
+      justify-self: end;
+    }
+
+    .phone-screen {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      background: #071014;
+      padding: 22px;
+      min-height: 560px;
+    }
+
+    .screen-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 26px;
+    }
+
+    .screen-title {
+      font-size: 1.35rem;
+      font-weight: 780;
+    }
+
+    .plus {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #041014;
+      display: grid;
+      place-items: center;
+      font-size: 1.55rem;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .snippet {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .snippet strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .snippet span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(16, 36, 43, 0.6);
+      padding: 22px;
+    }
+
+    .number {
+      display: inline-grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(34, 211, 238, 0.14);
+      color: var(--accent-strong);
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 48px;
+      align-items: start;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      border-left: 2px solid var(--accent);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px 14px;
+      color: var(--muted);
+    }
+
+    .note {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel-soft);
+      padding: 26px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .footer {
+      width: min(100% - 40px, var(--max));
+      margin: 0 auto;
+      padding: 32px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 820px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        padding: 16px 0;
+      }
+
+      .hero-grid,
+      .split,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero .section-inner {
+        min-height: auto;
+      }
+
+      .app-preview {
+        justify-self: start;
+        width: 100%;
+        max-width: none;
+      }
+
+      .phone-screen {
+        min-height: 420px;
+      }
+
+      .section-inner {
+        padding: 64px 0;
+      }
+
+      .footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="index.html" aria-label="CopyLion home">
+        <span class="mark">CL</span>
+        <span>CopyLion</span>
+      </a>
+      <div class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="section-inner">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">Collect AI text fragments</p>
+            <h1 id="hero-title">Stop losing your best AI outputs.</h1>
+            <p class="lead">Collect useful answers, prompts and text fragments from ChatGPT, Claude, Gemini and other AI tools in one fast place.</p>
+            <div class="actions">
+              <a class="button primary" href="PLACEHOLDER_APP_STORE_URL">Download on the App Store</a>
+              <a class="button" href="support.html">Get support</a>
+            </div>
+          </div>
+
+          <div class="app-preview" aria-label="CopyLion fragment collection preview">
+            <div class="phone-screen">
+              <div class="screen-top">
+                <div class="screen-title">Fragments</div>
+                <div class="plus" aria-hidden="true">+</div>
+              </div>
+              <div class="snippet">
+                <strong>Rewrite prompt</strong>
+                <span>Make this clearer, more specific, and easier to act on.</span>
+              </div>
+              <div class="snippet">
+                <strong>Useful answer</strong>
+                <span>A strong explanation from an AI chat, ready to reuse later.</span>
+              </div>
+              <div class="snippet">
+                <strong>Swipe file line</strong>
+                <span>Short copy fragment saved before it disappears into chat history.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="problem-title">
+      <div class="section-inner split">
+        <div>
+          <p class="eyebrow">Problem</p>
+          <h2 id="problem-title">Good AI text gets scattered fast.</h2>
+        </div>
+        <div>
+          <p class="lead">The best parts of AI conversations often arrive as fragments: a sentence, prompt, outline, title, answer, or useful phrasing. CopyLion gives those pieces a focused home outside endless chat histories, notes, and clipboard noise.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" aria-labelledby="how-title">
+      <div class="section-inner">
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-title">Capture text in seconds.</h2>
+        <div class="grid">
+          <div class="item">
+            <span class="number">1</span>
+            <h3>Save inside CopyLion</h3>
+            <p class="muted">Add fragments directly when you already know the text is worth keeping.</p>
+          </div>
+          <div class="item">
+            <span class="number">2</span>
+            <h3>Use your clipboard</h3>
+            <p class="muted">Copy text from another tool, then save it with a user-initiated action.</p>
+          </div>
+          <div class="item">
+            <span class="number">3</span>
+            <h3>Send from any app</h3>
+            <p class="muted">Use the iOS Share Sheet to send selected text into your collection.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="audience-title">
+      <div class="section-inner split">
+        <div>
+          <p class="eyebrow">Who it is for</p>
+          <h2 id="audience-title">Built for people who reuse ideas.</h2>
+        </div>
+        <ul class="list" aria-label="CopyLion audiences">
+          <li>AI power users saving strong answers and workflows</li>
+          <li>Copywriters and creators collecting reusable lines</li>
+          <li>Prompt collectors building a practical prompt library</li>
+          <li>Researchers keeping useful fragments from many tools</li>
+          <li>Anyone who wants a lighter place than a full notes app</li>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="privacy-title">
+      <div class="section-inner">
+        <div class="note">
+          <p class="eyebrow">Privacy-first</p>
+          <h2 id="privacy-title">Your fragments stay on your device.</h2>
+          <p class="lead">CopyLion has no account, no login, no analytics, no tracking, no ads, and no server-side fragment storage. Share Sheet, Shortcuts, and clipboard actions are used only when you choose to pass text into the app.</p>
+          <div class="actions">
+            <a class="button" href="privacy.html">Read the privacy policy</a>
+            <a class="button" href="support.html">Contact support</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>CopyLion</span>
+    <span><a href="support.html">Support</a> · <a href="privacy.html">Privacy Policy</a></span>
+  </footer>
+</body>
+</html>
