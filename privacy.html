@@ -77,46 +77,63 @@
 </head>
 <body>
   <main>
+    <!-- Publication candidate, 2026-10-02. Not published. See Release/PrivacyAndRequiredReasonAPIs.md. -->
     <h1>Privacy Policy</h1>
     <div class="meta">
-      <p><strong>Effective date:</strong> June 12, 2026</p>
-      <p><strong>Developer:</strong> Markus Untch<br>
+      <p><strong>Updated:</strong> October 2, 2026</p>
+      <p><strong>Developer / responsible person:</strong> Markus Untch<br>
       <strong>Contact:</strong> <a href="mailto:markus.untch@gmail.com">markus.untch@gmail.com</a></p>
     </div>
 
-    <h2>Privacy Summary</h2>
-    <p>Your fragments are stored locally on your device. CopyLion only imports text when you explicitly choose to add it. CopyLion does not monitor your clipboard in the background, does not require an account, does not use analytics or tracking, and does not share your text fragments with third parties.</p>
+    <h2>Privacy summary</h2>
+    <p>CopyLion stores your Text-Snippets, Collections, and final response on your device by default. You can use its local features without an account. When you choose account features or encrypted sync, account information and service metadata are processed online. Your synced text and Collection titles are encrypted on your device before upload.</p>
+    <p>CopyLion does not monitor your clipboard in the background, sell your personal data, use advertising or behavior analytics SDKs, or send your text to an AI service.</p>
 
-    <h2>Data We Collect</h2>
-    <p>CopyLion stores the text fragments and Collections you create or explicitly import into the app. This content is saved locally on your device so you can collect useful fragments, reorder them, save Collections, and copy one clean final response.</p>
+    <h2>Information you choose to add</h2>
+    <p>CopyLion stores text you create, paste, import, or explicitly share with it, together with Collection titles, ordering, Favorites, and the final response you compose. Clipboard, Share Sheet, and Shortcuts imports happen when you choose to pass content to CopyLion.</p>
+    <p>When you choose an image for text recognition on iPhone, Apple Vision recognizes text on the device. CopyLion does not upload the source image for recognition. Extracted text becomes a Text-Snippet only as part of the import you choose. If you then sync that text, it is encrypted like your other Text-Snippets.</p>
 
-    <h2>Data We Do Not Collect</h2>
-    <p>CopyLion does not collect account information, contact lists, location data, advertising identifiers, browsing history, or usage analytics. CopyLion does not sell your data.</p>
+    <h2>Optional accounts and authentication</h2>
+    <p>When you sign in by email, Supabase processes your email address, an assigned account identifier, authentication/session records, and the information needed to issue and verify sign-in codes. Resend, the email-delivery service, processes the recipient address, sign-in email, and delivery information. These records are used to authenticate you and operate and secure your account; they are not used by CopyLion for marketing.</p>
+    <p>Connecting a device through an authorized pairing invitation associates that device with the same account and encrypted vault. Signing in alone does not give a new device the keys to read your encrypted content.</p>
 
-    <h2>Clipboard, Share Sheet, and Shortcuts</h2>
-    <p>CopyLion does not monitor your clipboard in the background. CopyLion only imports text when you explicitly choose to add it, such as tapping an import or paste action inside the app, sharing selected content through the iOS Share Sheet, or running a Shortcut that passes text to CopyLion.</p>
-    <p>The Share Sheet only imports the content you choose to share. Shortcuts only import the text you explicitly pass to the Shortcut.</p>
+    <h2>Encrypted sync and visible metadata</h2>
+    <p>If you enable sync, the CopyLion relay hosted on Supabase stores encrypted versions of your Text-Snippets, Collection titles, final response, and related content. Content keys are held by your authorized devices; recovery and device-key material sent to the service is protected in encrypted key envelopes. The relay is not supplied the plaintext content keys needed to decrypt your text.</p>
+    <p>Encryption does not hide all service metadata. The service processes account, vault, device, record, and revision identifiers; record types and parent relationships; public cryptographic keys and signatures; encrypted key envelopes; payload sizes; sync cursors and timestamps; device authorization/revocation status; pairing/recovery state; and deletion markers. This information allows devices to synchronize, resolve changes, and manage access. It can be linked to your account.</p>
+    <p>Keep your recovery kit and authorized devices secure. We cannot restore readable content from an encrypted vault without the required keys. Content you explicitly export or share is readable by the destination you choose unless you select an encrypted export.</p>
 
-    <h2>Local Storage</h2>
-    <p>Your fragments are stored locally on your device. CopyLion does not upload your fragments to a CopyLion server and does not provide account-based online storage.</p>
+    <h2>Purchases</h2>
+    <p>Apple handles App Store payments. CopyLion does not receive your payment card details. StoreKit supplies verified transaction information to unlock purchased features locally.</p>
+    <p>If you are signed in, CopyLion can submit Apple-signed transaction information to the account service to verify eligible access. The service processes your account identifier and purchase information such as product and transaction identifiers, purchase/signing dates, revocation status, and a purchase-to-account token. This is used for entitlement verification, restoration on authorized devices, and preventing duplicate or fraudulent purchase claims.</p>
 
-    <h2>Third-Party Sharing</h2>
-    <p>CopyLion does not share your text fragments with third parties. CopyLion does not sell your data.</p>
+    <h2>Technical and support information</h2>
+    <p>Network connections to authentication and sync infrastructure expose technical information such as IP address, request time/path, response status, and client information. Infrastructure providers may retain service, authentication, security, and error logs, including account identifiers where present. CopyLion uses operational information to provide the service, investigate failures, and prevent abuse; it does not use it to profile your behavior for advertising. Gateway request logs also retain IP-derived country and city information for security and diagnostics.</p>
+    <p>If you contact support, we process your email address and the information you include to answer your request. Do not send recovery keys or content you do not want us to read.</p>
 
-    <h2>Analytics and Tracking</h2>
-    <p>CopyLion does not use analytics, tracking SDKs, advertising SDKs, cookies, or behavior profiling.</p>
+    <h2>Service providers and disclosures</h2>
+    <p>Supabase supplies account authentication, the encrypted relay, database hosting, and associated infrastructure. Resend sends authentication emails. Apple provides App Store purchases and platform services. Our public support and privacy website is hosted on GitHub Pages; visits to that website are also subject to GitHub&#x27;s handling of technical access data.</p>
+    <p>Providers receive the information necessary to perform their services. Encrypted sync content is stored by the infrastructure provider, but is not supplied as plaintext text. Your account information and operational metadata are separate from that encryption. We may disclose information where necessary to comply with applicable law or protect the service from abuse. We do not sell personal data or share it for cross-app targeted advertising.</p>
 
-    <h2>Children and Minors</h2>
-    <p>CopyLion is a general utility app and is not directed to children. CopyLion does not knowingly collect personal information from children or minors.</p>
+    <h2>Processing location</h2>
+    <p>The primary CopyLion database is configured in Frankfurt, Germany. Resend routes authentication emails through its configured Ireland sending region, but stores email content, delivery logs, and related customer records in the United States. Other provider and subprocessor operations may also occur outside the European Union. The providers&#x27; data-processing terms include Standard Contractual Clauses for applicable international transfers. Contact us for a copy or information about these safeguards.</p>
 
-    <h2>Data Deletion</h2>
-    <p>You can delete fragments and Collections inside the app. You can also remove CopyLion from your device to delete locally stored app data, subject to normal iOS backup and device behavior.</p>
+    <h2>Retention and deletion</h2>
+    <p>Local content remains on your device until you delete it or remove the local copy. Deleting content in the app removes it from the active view. With sync enabled, deletion markers are propagated to other authorized devices; encrypted prior revisions and change records can remain in the vault. Signing out stops account access on that device and lets you keep or remove its local content; signing out does not delete the account or its server vault.</p>
+    <p>You can request account deletion in Settings under the account controls. A recent sign-in is required. The process removes the account&#x27;s encrypted vault and related active database records, then deletes the Supabase authentication account. A durable background job retries an unavailable authentication deletion; the account cannot create another vault while deletion is pending. If the app reports a pending deletion, the request remains queued. Contact us if it does not complete. Local copies on other devices and exports you created are not remotely erased.</p>
+    <p>To prevent another account from claiming the same lifetime purchase, we retain the original transaction identifier, product identifier, claim date, and a closed-claim flag for as long as that purchase can confer access. The former account association is removed; no hash of its account identifier is needed for the closed flag. Pending deletion jobs retain the account identifier only until authentication deletion completes. The completed job then has no account identifier and is removed after seven days. Apple notification deduplication records are removed after seven days; purchase linkage in those audit records is cleared when the account is deleted. Expired pairing invitations, pairing sessions, and recovery challenges are removed during scheduled maintenance.</p>
+    <p>Provider retention is separate from account deletion. Supabase&#x27;s current Free-plan API/database log retention is one day and its external Auth audit-log window is one hour; these windows do not define every internal provider record or an independently stored database audit copy. Resend retains email and log data for 30 days on the current Free plan, with backups persisting for seven days. Those email records can remain after deleting a CopyLion account. Resend&#x27;s separate 90-day deletion provision applies if we terminate our Resend provider account, not when an individual deletes a CopyLion account. Support correspondence is kept while resolving your request and necessary follow-up, then removed unless a specific dispute or legal obligation requires retention.</p>
+    <p>Removing the app is separate from deleting the account. Device backups, system credential storage, other authorized devices, and copies you export may retain information under their own settings. Use the account-deletion controls before uninstalling if you also want the server account and vault removed.</p>
 
-    <h2>Changes to This Policy</h2>
-    <p>This policy may be updated if CopyLion changes in a way that affects privacy. The effective date will be updated when the policy changes.</p>
+    <h2 id="privacy-choices">Your choices and rights</h2>
+    <p>You can use CopyLion locally, choose whether to sign in and enable sync, export your content, manage authorized devices, sign out, and request account deletion. Contact markus.untch@gmail.com to ask about access, correction, deletion, portability, restriction, or objection to processing of your personal information. Rights and permitted retention exceptions depend on the law that applies to you. We may need to verify your identity before acting on an account request.</p>
+    <p>Where European data protection law applies, account authentication, delivery of sign-in emails, encrypted sync, and purchase-entitlement processing are necessary to provide the features you request (performance of a contract, Article 6(1)(b) GDPR). Security, operational troubleshooting, limited deletion confirmation, and prevention of repeated purchase claims serve our legitimate interest in protecting the service (Article 6(1)(f) GDPR). Where applicable, processing to meet a specific legal obligation relies on Article 6(1)(c). You may object to processing based on legitimate interests and complain to your competent data protection authority. Account information is necessary for account features, but you can use local features without creating an account.</p>
 
-    <h2>Contact</h2>
-    <p>For privacy or support questions, contact <a href="mailto:markus.untch@gmail.com">markus.untch@gmail.com</a>.</p>
+    <h2>Children</h2>
+    <p>CopyLion is a general utility and is not designed specifically for children. If you believe a child has provided personal information through an online CopyLion account, contact us so we can review the account and respond as required by applicable law.</p>
+
+    <h2>Changes and contact</h2>
+    <p>We may update this policy when the app or its processing practices change. The published policy will show its updated effective date.</p>
+    <p>Markus Untch is responsible for CopyLion. For privacy and support requests, email markus.untch@gmail.com.</p>
 
     <p class="footer"><a href="https://apps.apple.com/de/app/copylion/id6775437747">CopyLion on the App Store</a> · <a href="support.html">Support</a></p>
   </main>
